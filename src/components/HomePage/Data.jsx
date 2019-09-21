@@ -14,7 +14,7 @@ const data = [
         "D": "sleeps"
     },
     {
-        "question": "Arturo intends ______ history in colege.",
+        "question": "Arturo intends ______ history in college.",
         "A": "to study",
         "B": "studying",
         "C": "studies",

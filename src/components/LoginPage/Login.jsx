@@ -35,6 +35,9 @@ const Login = props => {
     e.preventDefault();
 
     if(loginInfo.email.length > 0 && loginInfo.password.length > 0) {
+      localStorage.clear();
+      localStorage.setItem("email", loginInfo.email);
+
       axios.post("/auth_path", loginInfo)
         .then(res => {
           console.log("res:  " + res);
