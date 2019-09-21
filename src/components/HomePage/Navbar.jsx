@@ -3,10 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import {
   MenuList,
   MenuItem,
-  ListItemIcon,
   Hidden,
   Drawer,
-  Grid,
   Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -76,11 +74,27 @@ const Navbar = props => {
       </MenuItem>
       <MenuItem
         component={Link}
+        to="/home/registerstatus"
+        classes={{ selected: classes.menuItemSelected }}
+        selected={selections[1]}
+      >
+        Registration Status
+      </MenuItem>
+      <MenuItem
+        component={Link}
         to="/home"
         classes={{ selected: classes.menuItemSelected }}
-        selected={selections[0]}
+        selected={selections[1]}
       >
         Courses
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        to="/home/exam"
+        classes={{ selected: classes.menuItemSelected }}
+        selected={selections[1]}
+      >
+        Take the Written Exam
       </MenuItem>
       <MenuItem
         component={Link}
@@ -92,11 +106,11 @@ const Navbar = props => {
       </MenuItem>
       <MenuItem
         component={Link}
-        to="/exam"
+        to="/intake-registration"
         classes={{ selected: classes.menuItemSelected }}
-        selected={selections[2]}
+        selected={selections[3]}
       >
-        Take the Written Exam
+        Intake Registration Form
       </MenuItem>
     </MenuList>
   );

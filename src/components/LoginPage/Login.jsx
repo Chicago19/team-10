@@ -33,7 +33,6 @@ const Login = props => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(email)
     if(email.length > 0 && password.length > 0) {
       axios.post("/auth_path", { email: email, password: password })
         .then(res => {

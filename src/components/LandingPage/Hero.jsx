@@ -36,7 +36,9 @@ const Hero = props => {
       <Grid item>
         <Typography variant="h2">Poder</Typography>
       </Grid>
-      <Grid item>[insert image]</Grid>
+      {/* <Grid item>
+        <img src="/poder-logo.png" alt="" />
+      </Grid> */}
       <Grid item>
         <IconButton size="medium" onClick={scrollAnimation}>
           <ExpandMore className={classes.downButton} />
