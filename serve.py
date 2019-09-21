@@ -40,7 +40,7 @@ cal = Session()
 # def hello():
 #     return {'test': True}
 
-
+@app.route("/")
 @app.route('/landing')
 @app.route('/registration')
 @app.route('/login')
