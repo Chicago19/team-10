@@ -11,7 +11,7 @@ CREATE TABLE class(
 	email varchar(30) REFERENCES profile(email),
 	class_name varchar(30) REFERENCES courses(class_name),
 	class_year char(4),
-	class_semester varchar(10) CHECK class_semester in ("fall", "spring", "summer"),
+	class_semester varchar(10),
 	score varchar(10),
 	PRIMARY KEY (email, class_name, class_year, class_semester)
 );
@@ -21,7 +21,7 @@ CREATE TABLE courses(
 	class_year char(4),
 	class_semester varchar(10),
 	PRIMARY KEY (class_name, class_year, class_semester)
-)
+);
 
 CREATE TABLE official(
 	email varchar(30) REFERENCES profile(email),
@@ -41,5 +41,3 @@ CREATE TABLE official(
 
 	PRIMARY KEY (email)
 );
-
-# C:\Users\jjsch\Documents\GitHub\team-10
