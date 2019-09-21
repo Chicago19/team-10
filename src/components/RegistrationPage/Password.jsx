@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import $ from "jquery";
 
 import { Grid, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+
+import { registerPassword } from "../../actions/RegistrationActions";
 
 const styles = {
   fullHeightContainer: {
@@ -17,7 +20,11 @@ const styles = {
 };
 
 const Password = props => {
-  const { classes } = props;
+  const { classes, registerPassword } = props;
+
+  const handlePasswordChange = e => {
+    registerPassword(e.target.value);
+  };
 
   const backAnimation = () => {
     $("html, body").animate(
@@ -54,6 +61,7 @@ const Password = props => {
           margin="normal"
           variant="outlined"
           className={classes.centerItem}
+          onChange={handlePasswordChange}
         />
       </Grid>
       <Grid item container justify="center" className={classes.fullWidthItem}>
@@ -82,4 +90,8 @@ const Password = props => {
   );
 };
 
-export default withStyles(styles)(Password);
+const mapDispatchToProps = {
+  registerPassword
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Password));

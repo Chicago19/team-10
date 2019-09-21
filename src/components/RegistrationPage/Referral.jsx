@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import $ from "jquery";
 
 import { Grid, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+
+import { registerReferral } from "../../actions/RegistrationActions";
 
 const styles = {
   fullHeightContainer: {
@@ -17,7 +20,11 @@ const styles = {
 };
 
 const Referral = props => {
-  const { classes } = props;
+  const { classes, registerReferral } = props;
+
+  const handleReferralChange = e => {
+    registerReferral(e.target.value);
+  };
 
   const backAnimation = () => {
     $("html, body").animate(
@@ -43,6 +50,7 @@ const Referral = props => {
           margin="normal"
           variant="outlined"
           className={classes.centerItem}
+          onChange={handleReferralChange}
         />
       </Grid>
       <Grid item container className={classes.fullWidthItem}>
@@ -61,4 +69,8 @@ const Referral = props => {
   );
 };
 
-export default withStyles(styles)(Referral);
+const mapDispatchToProps = {
+  registerReferral
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Referral));
