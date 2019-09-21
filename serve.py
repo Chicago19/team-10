@@ -77,24 +77,18 @@ def email_test():
         return {"result": False}
 
 
-# @app.route('/all_classes', methods=['POST', 'GET'])
-# # def return_all_classes():
-# #
-# #     return {'output': ["IE": [
-# #         "Intro",
-# #         "1",
-# #         "2",
-# #         "3",
-# #         "4",
-# #         "5"
-# #         ],
-# #         "WFD": [
-# #             "CustServ",
-# #             "LatinFinance",
-# #             "Insurance"
-# #         ]]
-# #         }
 
+@app.route('/all_classes', methods=['POST', 'GET'])
+def return_all_classes():
+    ie_classes = ["Intro", "1", "2", "3", "4", "5"]
+    wfd_classes = ["CustServ", "LatinFinance", "Insurance"]
+
+    return {
+        "output": {
+            "ie": ie_classes,
+            "wfd": wfd_classes
+        }
+    }
 
 @app.route('/avalible_classes', methods=['POST', 'GET'])
 def return_avalible_classes():
