@@ -77,9 +77,9 @@ def email_test():
         return {"result": False}
 
 
+
 @app.route('/all_classes', methods=['POST', 'GET'])
 def return_all_classes():
-
     ie_classes = ["Intro", "1", "2", "3", "4", "5"]
     wfd_classes = ["CustServ", "LatinFinance", "Insurance"]
 

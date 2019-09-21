@@ -10,7 +10,7 @@ CREATE TABLE profile(
 CREATE TABLE class(
 	email varchar(30) REFERENCES profile(email),
 	class_name varchar(30),
-	class_year char(4),
+	class_year varchar(4),
 	class_semester varchar(10),
 	score varchar(10),
 	PRIMARY KEY (email, class_name, class_year, class_semester)

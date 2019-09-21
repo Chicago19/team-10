@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import $ from "jquery";
 
-import { Grid, TextField, Button, Typography } from "@material-ui/core";
+import { Grid, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+
+import { registerEmail } from "../../actions/RegistrationActions";
 
 const styles = {
   fullHeightContainer: {
@@ -13,14 +16,24 @@ const styles = {
   },
   centerItem: {
     width: "100%"
-  },
-  headerPadding: {
-    marginBottom: "5%"
   }
 };
 
 const Email = props => {
-  const { classes } = props;
+  const { classes, registerEmail } = props;
+
+  const handleEmailChange = e => {
+    registerEmail(e.target.value);
+  };
+
+  const backAnimation = () => {
+    $("html, body").animate(
+      {
+        scrollTop: $("#name").offset().top
+      },
+      800
+    );
+  };
 
   const nextAnimation = () => {
     $("html, body").animate(
@@ -40,11 +53,6 @@ const Email = props => {
       className={classes.fullHeightContainer}
       id="email"
     >
-      <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-        <Typography variant="h2">
-          Registration
-        </Typography>
-      </Grid>
       <Grid item container justify="center" className={classes.fullWidthItem}>
         <TextField
           required
@@ -53,15 +61,27 @@ const Email = props => {
           margin="normal"
           variant="outlined"
           className={classes.centerItem}
+          onChange={handleEmailChange}
         />
       </Grid>
-      <Grid item container justify="flex-end" className={classes.fullWidthItem}>
-        <Button variant="outlined" onClick={nextAnimation}>
-          Next
-        </Button>
+      <Grid item container className={classes.fullWidthItem}>
+        <Grid item xs container>
+          <Button variant="outlined" onClick={backAnimation}>
+            Back
+          </Button>
+        </Grid>
+        <Grid item xs container justify="flex-end">
+          <Button variant="outlined" onClick={nextAnimation}>
+            Next
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
 };
 
-export default withStyles(styles)(Email);
+const mapDispatchToProps = {
+  registerEmail
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Email));
