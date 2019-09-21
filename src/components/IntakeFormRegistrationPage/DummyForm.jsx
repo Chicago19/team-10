@@ -14,7 +14,7 @@ const DummyForm = props => {
     const { classes } = props;
 
     return (
-        <Grid>
+        <Grid
             container
             direction="column"
             alignItems="center"
@@ -23,12 +23,12 @@ const DummyForm = props => {
             id="SSN"
         >
             <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-                <Typography variant="h2">Primary Mode of Transportation?</Typography>
+                <Typography variant="h6">Primary Mode of Transportation?</Typography>
             </Grid>
             <Grid item container justify="center" className={classes.fullWidthItem}>
                 <TextField
                     required
-                    label="SSN"
+                    label="Transportation"
                     type="SSN"
                     margin="normal"
                     variant="outlined"
@@ -36,12 +36,12 @@ const DummyForm = props => {
                 />
             </Grid>
             <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-                <Typography variant="h2">Perferred cite location?</Typography>
+                <Typography variant="h6">Perferred cite location?</Typography>
             </Grid>
             <Grid item container justify="center" className={classes.fullWidthItem}>
                 <TextField
                     required
-                    label="Nme"
+                    label="Location"
                     type="Name"
                     margin="normal"
                     variant="outlined"
@@ -49,12 +49,12 @@ const DummyForm = props => {
                 />
             </Grid>
             <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-                <Typography variant="h2">Did you complete the Empowerment Survey?</Typography>
+                <Typography variant="h6">Completed the Empowerment Survey?</Typography>
             </Grid>
             <Grid item container justify="center" className={classes.fullWidthItem}>
                 <TextField
                     required
-                    label="Marital"
+                    label="Yes/No"
                     type="Marital"
                     margin="normal"
                     variant="outlined"
@@ -62,7 +62,7 @@ const DummyForm = props => {
                 />
             </Grid>
             <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-                <Typography variant="h2">Example Question 4</Typography>
+                <Typography variant="h6">Example Question 4</Typography>
             </Grid>
             <Grid item container justify="center" className={classes.fullWidthItem}>
                 <TextField
@@ -75,12 +75,12 @@ const DummyForm = props => {
                 />
             </Grid>
             <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-                <Typography variant="h2">Example Question 5</Typography>
+                <Typography variant="h6">Example Question 5</Typography>
             </Grid>
             <Grid item container justify="center" className={classes.fullWidthItem}>
                 <TextField
                     required
-                    label="Highest Education Level"
+                    label="Cell"
                     type="HighestEducation Level"
                     margin="normal"
                     variant="outlined"

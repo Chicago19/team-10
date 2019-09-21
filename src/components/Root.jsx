@@ -9,6 +9,7 @@ import Login from "./LoginPage/Login";
 import Home from "./HomePage/Home";
 import WrittenExam from "./HomePage/WrittenExam";
 import DummyForm from "./IntakeFormRegistrationPage/DummyForm";
+import ClassForm from "./CourseRegistrationPage/ClassForm";
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -20,6 +21,7 @@ const Root = ({ store }) => (
         <Route path="/login" component={Login} />
         <Route path="/home/exam" component={WrittenExam} />
         <Route path="/intake-registration" component={DummyForm} />
+        <Route path="/course-registration" component={ClassForm} />
         <Route path="/home" component={Home} />
       </Switch>
     </Router>
