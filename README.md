@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Important Setup
+
+Create a `temp` directory in the root folder, and copy to it all files contained in the `build` directory. Then, move `index.css` and `manifest.json` to the `static` subdirectory within `temp`.  
+
 ## Available Scripts
 
 In the project directory, you can run:
