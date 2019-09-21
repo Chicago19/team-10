@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import App from "../App";
 import Landing from "./LandingPage/Landing";
 import Registration from "./RegistrationPage/Registration";
 import Login from "./LoginPage/Login";

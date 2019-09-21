@@ -40,10 +40,15 @@ const Referral = props => {
       alert("One or more required fields is not complete!");
       return;
     }
-      axios.post("/create_profile", profile)
-        .then(res => {
-          console.log("success");
-        });
+
+    localStorage.clear();
+    localStorage.setItem("name", profile.name);
+    localStorage.setItem("email", profile.email);
+
+    axios.post("/create_profile", profile).then(res => {
+      console.log("success");
+      window.location.pathname = "/home";
+    });
   };
 
   const backAnimation = () => {
