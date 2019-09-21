@@ -1,9 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 
 import { Grid, TextField, Button, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
+
+import { loginEmail, loginPassword } from "../../actions/LoginActions";
 
 const styles = {
   fullHeightContainer: {
@@ -18,25 +21,24 @@ const styles = {
 };
 
 const Login = props => {
-  const { classes } = props;
-  let email = "";
-  let password = "";
+  const { classes, loginInfo, loginEmail, loginPassword } = props;
 
   const handleEmailChange = (e) => {
-    email = e.target.value;
+    loginEmail(e.target.value);
   }
 
   const handlePasswordChange = (e) => {
-    password = e.target.value;
+    loginPassword(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(email.length > 0 && password.length > 0) {
-      axios.post("/auth_path", { email: email, password: password })
+    if(loginInfo.email.length > 0 && loginInfo.password.length > 0) {
+      axios.post("/auth_path", loginInfo)
         .then(res => {
-          console.log("success");
+          console.log("res:  " + res);
+          window.location.pathname = "/home";
         });
     } else {
       return;
@@ -78,7 +80,7 @@ const Login = props => {
           margin="normal"
           variant="outlined"
           className={classes.centerItem}
-          onChangePassword={handlePasswordChange}
+          onChange={handlePasswordChange}
         />
       </Grid>
       <Grid item container className={classes.fullWidthItem}>
@@ -94,4 +96,15 @@ const Login = props => {
   );
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+  return {
+    loginInfo: state.LoginReducer
+  }
+}
+
+const mapDispatchToProps = {
+  loginEmail,
+  loginPassword
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

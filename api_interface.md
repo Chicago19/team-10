@@ -1,4 +1,4 @@
-# API Interface
+↑# API Interface
 
 ## Available Request URLs, Their Inputs, And Return Types
 
@@ -52,7 +52,7 @@ Note that other attributes are also present - reference https://developers.googl
   "age": "age"
 }
 ```
-**Outputs**: `{"score": int}`
+**Outputs**: `{'return': 'Boolean'}`
 
 
 ### `/auth_path` - Authenticate a user

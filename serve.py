@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 from calendar_integration import Session
 from backend.backend_official import backend_official
 from backend.backend_score import backend_score
-from backend.profile import backend_profile
+from backend.backend_profile import backend_profile
 from backend.config import config
 import os
 
@@ -144,10 +144,10 @@ def return_classes():
 
 @app.route('/survey_two', methods=['POST', 'GET'])
 def take_data():
-    data = request.json
-    empowerment_survey = data['empowerment_survey']
-    transportation = data['transportation']
-    site_location = data['site_location']
+    # data = request.json
+    # empowerment_survey = data['empowerment_survey']
+    # transportation = data['transportation']
+    # site_location = data['site_location']
 
     # Didn't get to implement in time.
     return None
@@ -208,7 +208,7 @@ def update_score():
     return {"result": False}
 
 
-@app.route('view_class_score', methods=['POST', 'GET'])
+@app.route('/view_class_score', methods=['POST', 'GET'])
 def view_class_score():
     data = request.json
     email = data['email']
