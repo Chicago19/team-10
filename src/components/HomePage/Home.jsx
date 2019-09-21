@@ -1,13 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, IconButton, Button, MenuItem, Grid, Typography} from "@material-ui/core";
+import { connect } from "react-redux";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  MenuItem,
+  Grid,
+  Typography
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
-//eslint-disable-next-line
+
+import axios from "axios";
+
+import { registerEmail, registerName } from "../../actions/RegistrationActions";
+
 import Navbar from "./Navbar";
 
-//eslint-disable-next-line
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -33,15 +45,33 @@ const useStyles = makeStyles(theme => ({
   centerButtons: {
     marginTop: theme.spacing(10),
     height: "100%",
-    maxWidth: "100%",
-  },
+    maxWidth: "100%"
+  }
 }));
-const Home = () => {
+const Home = props => {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   //const anchorRef = React.useRef(null);
   const classes = useStyles();
 
+  const email = localStorage.getItem("email");
+  const name = localStorage.getItem("name");
+
+  if (email !== undefined) {
+    props.registerEmail(email);
+    console.log("email: " + email);
+
+    if (name !== undefined) {
+      props.registerName(name);
+    } else {
+      axios.get("/view_profile", { email: email }).then(res => {
+        console.log("data");
+        console.log(res);
+
+        props.registerName(res.name);
+      });
+    }
+  }
 
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
@@ -85,7 +115,8 @@ const Home = () => {
             alignItems="center"
             aria-controls="simple-menu"
             aria-haspopup="true"
-            onClick={handleClick}>
+            onClick={handleClick}
+          >
             <Typography variant="h3">Current Courses:</Typography>
           </Button>
           <Menu
@@ -95,10 +126,11 @@ const Home = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem 
-            onClick={handleClose}
-            component={Link}
-            to="/course-registration">
+            <MenuItem
+              onClick={handleClose}
+              component={Link}
+              to="/course-registration"
+            >
               Current Course Example 1
             </MenuItem>
           </Menu>
@@ -109,21 +141,24 @@ const Home = () => {
             alignItems="center"
             aria-controls="simple-menu"
             aria-haspopup="true"
-            onClick={handleClick}>
+            onClick={handleClick}
+          >
             <Typography variant="h3">Available Courses:</Typography>
           </Button>
-          <Menu id="simple-menu"
+          <Menu
+            id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem 
-            onClick={handleClose}
-            component={Link}
-            to="/course-registration">
+            <MenuItem
+              onClick={handleClose}
+              component={Link}
+              to="/course-registration"
+            >
               Available Course Example
-              </MenuItem>
+            </MenuItem>
           </Menu>
         </Grid>
       </Grid>
@@ -132,4 +167,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapDispatchToProps = {
+  registerEmail,
+  registerName
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);
