@@ -5,6 +5,7 @@ from backend.backend_score import backend_score
 from backend.backend_profile import backend_profile
 from backend.config import config
 import os
+import hashlib
 
 backend_official = backend_official(
                 config['user'],
@@ -59,8 +60,13 @@ def calendar():
 @app.route('/create_profile', methods=['POST', 'GET'])
 def add_profile():
     profile_data = request.json
+    user_entered_password = profile_data['password']
+    salt = "salty"
+    db_password = user_entered_password+salt
+    profile_data['password'] = hashlib.md5(db_password.encode()).hexdigest()
     print(profile_data)
     if backend_profile.insert_profile(profile_data):
+        print("Registration successful!")
         return {'return': True}
     else:
         return {'return': False}
@@ -68,10 +74,17 @@ def add_profile():
 
 @app.route('/auth_path', methods=['POST', 'GET'])
 def authenticate():
-    profile = request.json
-    if backend_profile.check_login_password(profile['email'], profile['password']):
+    profile_data = request.json
+    user_entered_password = profile_data['password']
+    salt = "salty"
+    db_password = user_entered_password+salt
+    profile_data['password'] = hashlib.md5(db_password.encode()).hexdigest()
+    print(profile_data)
+    if backend_profile.check_login_password(profile_data['email'], profile_data['password']):
+        print("Login successful!")
         return {"result": True}
     else:
+        print("Login failed.")
         return {"result": False}
 
 
