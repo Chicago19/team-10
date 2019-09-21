@@ -1,10 +1,12 @@
 from flask import Flask, request, render_template
 from calendar_integration import Session
 from backend.backend_official import backend_official
+from backend.backend_score import backend_score
+from backend.profile import backend_profile
 from backend.config import config
 import os
 
-backend = backend_official(
+backend_official = backend_official(
                 config['user'],
                 config['pass'],
                 config['host'],
@@ -12,7 +14,24 @@ backend = backend_official(
                 config['db_name']
         )
 
-app = Flask(__name__, static_folder='./temp', template_folder='build')
+backend_profile = backend_profile(
+                config['user'],
+                config['pass'],
+                config['host'],
+                config['port'],
+                config['db_name']
+        )
+
+backend_score = backend_score(
+                config['user'],
+                config['pass'],
+                config['host'],
+                config['port'],
+                config['db_name']
+        )
+
+
+app = Flask(__name__, static_folder='./temp/static', template_folder='build')
 cal = Session()
 
 
@@ -53,7 +72,7 @@ def scoring():
 def add_profile():
     profile_data = request.json
     print(profile_data)
-    if backend.insert_profile(profile_data):
+    if backend_profile.insert_profile(profile_data):
         return {'return': True}
     else:
         return {'return': False}
@@ -62,7 +81,7 @@ def add_profile():
 @app.route('/auth_path', methods=['POST', 'GET'])
 def authenticate():
     profile = request.json
-    if backend.__check_login_password(profile['email'], profile['password']):
+    if backend_profile.__check_login_password(profile['email'], profile['password']):
         return {"result": True}
     else:
         return {"result": False}
@@ -71,15 +90,15 @@ def authenticate():
 @app.route('/email_test', methods=['POST', 'GET'])
 def email_test():
     data = request.json
-    if backend.check_email(data['email']):
+    if backend_profile.check_email(data['email']):
         return {"result": True}
     else:
         return {"result": False}
 
 
-
 @app.route('/all_classes', methods=['POST', 'GET'])
 def return_all_classes():
+
     ie_classes = ["Intro", "1", "2", "3", "4", "5"]
     wfd_classes = ["CustServ", "LatinFinance", "Insurance"]
 
@@ -108,17 +127,77 @@ def return_avalible_classes():
 def return_classes():
     data = request.json
     if data['request_type'] == 'all':
-        result = backend.get_all_user_clases(data['email'])
+        result = backend_official.get_all_user_classes(data['email'])
         output = {}
         for val in result:
             output.append(val)
         return output
     elif data['request_type'] == 'current':
-        result = backend.get_cur_user_classes(data['email'])
+        result = backend_official.get_cur_user_classes(data['email'])
         output = {}
         for val in result:
             output.append(val)
         return output
+
+
+@app.route("/update_exam", methods=['POST', 'GET'])
+def update_exam():
+    data = request.json
+    score = int(data['score'])
+    email = data['email']
+    cat = {
+        0: 'Basic_Workbook',
+        1: 'Basic',
+        2: 'VentOne',
+        3: 'VentTwo',
+        4: 'VentThree',
+        5: 'VenetFour'
+    }
+
+    if backend_official.update_written_exam(email, score, cat[score]):
+        return {"result": True}
+    return {"result": False}
+
+
+@app.route('/write_class_score', methods=['POST', 'GET'])
+def write_score():
+    data = request.json
+    email = data['email']
+    class_name = data['class_name']
+    class_year = data['class_year'],
+    class_semester = data['class_semester'],
+    score = data['score']
+
+    if backend_score.write_class_score(email, class_name, class_year, class_semester, score):
+        return {"result": True}
+    return {"result": False}
+
+@app.route('/update_class_score', methods=['POST', 'GET'])
+def update_score():
+    data = request.json
+    email = data['email']
+    class_name = data['class_name']
+    class_year = data['class_year'],
+    class_semester = data['class_semester'],
+    score = data['score']
+
+    if backend_score.update_score(email, class_name, class_year, class_semester, score):
+        return {"result": True}
+    return {"result": False}
+
+@app.route('view_class_score', methods=['POST', 'GET'])
+def view_class_score():
+    data = request.json
+    email = data['email']
+    class_name = data['class_name']
+    class_year = data['class_year'],
+    class_semester = data['class_semester']
+
+    score = backend_score.view_class_score(email, class_name, class_year, class_semester)
+    if score not in [0, -1]:
+        return {"score": score}
+    else:
+        return {"score": "error"}
 
 
 if __name__ == '__main__':
