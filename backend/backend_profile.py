@@ -74,7 +74,8 @@ class backend_profile():
             return []
         finally:
             self.close_connection(connection,cursor)
-    def __check_login_password(self,email,password):
+
+    def check_login_password(self,email,password):
         try:
             connection = self.connect_to_database()
             cursor = connection.cursor()

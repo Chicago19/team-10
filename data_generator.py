@@ -14,36 +14,33 @@ import random
 
 # In[30]:
 
-# backend_official = backend_official(
-#                 config['user'],
-#                 config['pass'],
-#                 config['host'],
-#                 config['port'],
-#                 config['db_name']
-#         )
-#
-# backend_profile = backend_profile(
-#                 config['user'],
-#                 config['pass'],
-#                 config['host'],
-#                 config['port'],
-#                 config['db_name']
-#         )
-#
-# backend_score = backend_score(
-#                 config['user'],
-#                 config['pass'],
-#                 config['host'],
-#                 config['port'],
-#                 config['db_name']
-#         )
-
 
 def generate_data(n):
+
+    b_official = backend_official(
+                    config['user'],
+                    config['pass'],
+                    config['host'],
+                    config['port'],
+                    config['db_name']
+    )
+
+    b_profile = backend_profile(
+                    config['user'],
+                    config['pass'],
+                    config['host'],
+                    config['port'],
+                    config['db_name']
+    )
+
+    b_score = backend_score(
+                    config['user'],
+                    config['pass'],
+                    config['host'],
+                    config['port'],
+                    config['db_name']
+    )
     fake = Faker()
-    bd = backend_profile('postgres','940728','localhost','5432','cfg_10')
-    bo = backend_official('postgres','940728','localhost','5432','cfg_10')
-    bs = backend_score('postgres','940728','localhost','5432','cfg_10')
     for i in range(n):
         profile = dict()
         profile['name'] = fake.name()
@@ -52,11 +49,11 @@ def generate_data(n):
         profile['referral'] = fake.name()
         profile['age'] = random.randint(0,99)
         profile['password'] = fake.ean13()
-        bd.insert_profile(profile)
-        bo.update_written_exam(profile['email'],random.randint(0,40),'Intro In English')
-        term = ['spring','summer','fall']
-        bs.write_class_score(profile['email'],'Intro In English',random.randint(2000,2019),term[random.randint(0,2)],10)
-        #print(profile)
+        b_profile.insert_profile(profile)
+        b_official.update_written_exam(profile['email'],random.randint(0,40),'Intro In English')
+        term = ['spring', 'summer', 'fall']
+        b_score.write_class_score(profile['email'],'Intro In English', random.randint(2000,2019),term[random.randint(0,2)],10)
+        # print(profile)
 
 
 if __name__ == "__main__":

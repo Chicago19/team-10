@@ -154,3 +154,18 @@ Note - case and whitespace insensitive in input
   ]
 }
 ```
+
+### `./view_profile` - Returns user profile information
+
+**Input**: `{"email": "string"}`
+
+**Output**:
+```JSON
+{
+  "name": "string",
+  "email": "string",
+  "referral": "string",
+  "phone": "string",
+  "age": "string"
+}
+```

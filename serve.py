@@ -69,7 +69,7 @@ def add_profile():
 @app.route('/auth_path', methods=['POST', 'GET'])
 def authenticate():
     profile = request.json
-    if backend_profile.__check_login_password(profile['email'], profile['password']):
+    if backend_profile.check_login_password(profile['email'], profile['password']):
         return {"result": True}
     else:
         return {"result": False}
@@ -152,6 +152,11 @@ def take_data():
     # Didn't get to implement in time.
     return None
 
+@app.route('/view_profile', methods=['POST', 'GET'])
+def get_data():
+    data = request.json
+    result = backend_official.view_profile(data['email'])
+    return result
 
 @app.route("/written_exam_score", methods=['POST', 'GET'])
 def written_exam_score():
