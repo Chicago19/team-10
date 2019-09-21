@@ -3,7 +3,7 @@ CREATE TABLE profile(
 	email varchar(30) PRIMARY KEY,
 	referral varchar(30),
 	phone varchar(13),
-	password char(42),
+	password varchar(42),
 	age char(2)
 );
 
