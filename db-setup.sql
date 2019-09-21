@@ -10,8 +10,17 @@ CREATE TABLE profile(
 CREATE TABLE class(
 	email varchar(30) REFERENCES profile(email),
 	class_name varchar(30),
+	class_year varchar(4),
+	class_semester varchar(10),
 	score varchar(10),
-	PRIMARY KEY (email, class_name)
+	PRIMARY KEY (email, class_name, class_year, class_semester)
+);
+
+CREATE TABLE courses(
+	class_name VARCHAR(30),
+	class_year char(4),
+	class_semester varchar(10),
+	PRIMARY KEY (class_name, class_year, class_semester)
 );
 
 CREATE TABLE official(
@@ -24,7 +33,7 @@ CREATE TABLE official(
 	test_date timestamp,
 	best_exam varchar(30),
 	iccb_intake_form varchar(30),
-	empowerment_survey varchar(30),
+	empowerment_survey varchar(30), 
 	transportation varchar(10),
 	site_location varchar(15),
 	sig_date timestamp,

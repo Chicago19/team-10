@@ -45,6 +45,7 @@ Thumbs.db
 *.rar
 *.tar
 *.zip
+*.pyc
 
 # ignore private/secret files
 *.der

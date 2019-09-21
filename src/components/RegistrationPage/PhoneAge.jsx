@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import $ from "jquery";
 
 import { Grid, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+
+import { registerPhone, registerAge } from "../../actions/RegistrationActions";
 
 const styles = {
   fullHeightContainer: {
@@ -17,7 +20,15 @@ const styles = {
 };
 
 const PhoneAge = props => {
-  const { classes } = props;
+  const { classes, registerPhone, registerAge } = props;
+
+  const handlePhoneChange = e => {
+    registerPhone(e.target.value);
+  };
+
+  const handleAgeChange = e => {
+    registerAge(e.target.value);
+  };
 
   const backAnimation = () => {
     $("html, body").animate(
@@ -55,6 +66,7 @@ const PhoneAge = props => {
             margin="normal"
             variant="outlined"
             className={classes.centerItem}
+            onChange={handlePhoneChange}
           />
         </Grid>
         <Grid item xs={1} />
@@ -66,6 +78,7 @@ const PhoneAge = props => {
             margin="normal"
             variant="outlined"
             className={classes.centerItem}
+            onChange={handleAgeChange}
           />
         </Grid>
       </Grid>
@@ -85,4 +98,9 @@ const PhoneAge = props => {
   );
 };
 
-export default withStyles(styles)(PhoneAge);
+const mapDispatchToProps = {
+  registerPhone,
+  registerAge
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(PhoneAge));

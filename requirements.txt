@@ -1,5 +1,4 @@
 cachetools==3.1.1
-certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
 Flask==1.1.1
@@ -13,7 +12,6 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 oauthlib==3.1.0
-psycopg2==2.8.3
 pyasn1==0.4.7
 pyasn1-modules==0.2.6
 python-dotenv==0.10.3

@@ -38,13 +38,6 @@ All requests support POST and GET.
 
 Note that other attributes are also present - reference https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.calendarList.html#list
 
-
-### `/score` - Scores a user's exam
-
-**Inputs**: `"answers": [1,1,2,4]`
-
-**Outputs**: `{'score': score}`
-
 ### `/create_profile` - Creates a user's profile
 
 **Inputs**:
@@ -78,3 +71,86 @@ Note that other attributes are also present - reference https://developers.googl
 **Inputs**: `{"email": "email_address"}`
 
 **Outputs**: `{"result": boolean}`
+
+### `/view_class_score` - View a user's class score
+
+**Inputs**:
+
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string"
+}
+```
+
+**Outputs**:
+If success: `{"score": score}`. If fail: `{"score": "error"}`
+
+### `/update_class_score` - Update a user's score in a class
+
+**Inputs**:
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string",
+  "score": "Integer"
+}
+```
+
+**Outputs**:
+  `{"result": bool}`
+
+### `write_class_score` - Write a user's class score
+
+**Inputs**:
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string",
+  "score": "Integer"
+}
+```
+
+**Outputs**:
+  `{"result": bool}`
+
+### `./written_exam_score` - Update a user's written exam score.
+
+**Inputs** -
+```json
+{
+"email": "string",
+"answers": ["b", "c", "a", "a", "d", "a"]
+}
+```
+Note - case and whitespace insensitive in input
+
+**Output** - `{"score": "integer", "class": "string"}`, or `{"result": False}`
+
+### `./user_classes` - Return a user's classes.
+
+**Inputs** -
+```json
+{
+  "request_type": ["all","current"],
+  "email": "string"
+}
+```
+
+**Output** -
+
+```json
+{
+  "class_name": [
+    "class1",
+    "class2",
+    "..."
+  ]
+}
+```
