@@ -5,8 +5,7 @@ import json
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 cal = Session()
 
-@app.route("/", methods=['POST'])
-@app.route("/hello", methods=['POST'])
+@app.route("/", methods=['POST', 'GET'])
 def hello():
     return {"test": True}
 
@@ -17,8 +16,6 @@ def calendar():
     print(type(event_name))
     return {'result': cal.search_events(event_name)}
 
-    # return {"test": True}
-
 @app.route("/score", methods=['POST', 'GET'])
 def scoring():
     user_score = request.json['answers']
@@ -28,6 +25,10 @@ def scoring():
         if vals[0] == vals[1]:
             score += 1
     return {'score': score}
+
+
+
+
 
 if __name__ == "__main__":
     app.debug = True
