@@ -59,7 +59,7 @@ class backend_official():
         finally:
             self.close_connection(connection,cursor)
 
-    def get_all_classes(self):
+    def get_cur_user_classes(self, email):
         try:
             connection = psycopg2.connect(user=self.user,
                                          password=self.password,
@@ -68,22 +68,7 @@ class backend_official():
                                          database=self.database)
             cursor = connection.cursor()
 
-            vals = cursor.execute("SELECT * FROM courses")
-            return vals
-
-        except Exception:
-            return False
-
-    def get_user_clases(self, email):
-        try:
-            connection = psycopg2.connect(user=self.user,
-                                         password=self.password,
-                                         host=self.host,
-                                         port=self.port,
-                                         database=self.database)
-            cursor = connection.cursor()
-
-            now = datetime.now()
+            now = datetime.datetime.now()
 
             if datetime.month > 8:
                 semester = "summer"
@@ -92,11 +77,27 @@ class backend_official():
             else:
                 semester = "fall"
 
-            vals = cursor.execute("SELECT class_name FROM class WHERE email = ? AND class_year = ? AND class_semester = ?", (email, now.year, semester))
+            vals = cursor.execute("SELECT class_name FROM class WHERE email = %s AND class_year = %s AND class_semester = %s", (email, now.year, semester))
             return vals
 
         except Exception:
             return False
+
+        def get_all_user_classes(self, email):
+            try:
+                connection = psycopg2.connect(user=self.user,
+                                             password=self.password,
+                                             host=self.host,
+                                             port=self.port,
+                                             database=self.database)
+                cursor = connection.cursor()
+
+
+                vals = cursor.execute("SELECT class_name FROM class WHERE email = %s", (email, now.year, semester))
+                return vals
+
+            except Exception:
+                return False
 
 
 

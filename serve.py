@@ -76,15 +76,54 @@ def email_test():
         return {"result": False}
 
 
+@app.route('/all_classes', methods=['POST', 'GET'])
+# def return_all_classes():
+#
+#     return {'output': ["IE": [
+#         "Intro",
+#         "1",
+#         "2",
+#         "3",
+#         "4",
+#         "5"
+#         ],
+#         "WFD": [
+#             "CustServ",
+#             "LatinFinance",
+#             "Insurance"
+#         ]]
+#         }
+
+
 @app.route('/avalible_classes', methods=['POST', 'GET'])
+def return_avalible_classes():
+    data = request.json
+    # Pass for now
+    #If in levels 1-3, then cannot register
+    #for Latinos in Finance or Bilingual insurance licensed sales
+    #Must take customer service to qualify for LiF and BILS
+    #For levels IE 3-5 can register for the LiF class or BILS
+    #can double with IE 1-3 and customer service
+    #can double with IE level 3-5 and LiF and BILS
+    # # TODO: Do this
+    return {"None": False}
+
+
+@app.route('/user_classes', methods=['POST', 'GET'])
 def return_classes():
     data = request.json
-    # Do something with the data.
-    return backend.get_all_classes()
-
-
-
-
+    if data['request_type'] == 'all':
+        result = backend.get_all_user_clases(data['email'])
+        output = {}
+        for val in result:
+            output.append(val)
+        return output
+    elif data['request_type'] == 'current':
+        result = backend.get_cur_user_classes(data['email'])
+        output = {}
+        for val in result:
+            output.append(val)
+        return output
 
 
 if __name__ == '__main__':
