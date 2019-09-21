@@ -105,24 +105,3 @@ class backend_official():
         if (connection):
             cursor.close()
             connection.close()
-
-
-# In[26]:
-
-
-#bd = backend_official('postgres','940728','localhost','5432','cfg_10')
-
-
-# In[27]:
-
-
-#bd.update_written_exam('1234@illinois.edu',28,'Intro In English')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:

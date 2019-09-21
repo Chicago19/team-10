@@ -83,32 +83,5 @@ class backend_score():
             connection.close()
 
 
-# In[34]:
-
-
-#bd = backend_score('postgres','940728','localhost','5432','cfg_10')
-
-
-# In[35]:
-
-
-#bd.write_class_score('1234@illinois.edu','Intro In English','2019','spring',10)
-
-
-# In[36]:
-
-
-#bd.update_score('1234@illinois.edu','Intro In English','2019','spring',10)
-
-
-# In[37]:
-
-
-#bd.view_class_score('1234@illinois.edu','Intro In English','2019','spring')
-
-
-# In[ ]:
-
-
 
 
