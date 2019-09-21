@@ -38,13 +38,6 @@ All requests support POST and GET.
 
 Note that other attributes are also present - reference https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.calendarList.html#list
 
-
-### `/score` - Scores a user's exam
-
-**Inputs**: `"answers": [1,1,2,4]`
-
-**Outputs**: `{'score': score}`
-
 ### `/create_profile` - Creates a user's profile
 
 **Inputs**:
@@ -127,14 +120,37 @@ If success: `{"score": score}`. If fail: `{"score": "error"}`
 **Outputs**:
   `{"result": bool}`
 
-### `./insert_written_exam` - Update a user's written exam score.
+### `./written_exam_score` - Update a user's written exam score.
 
 **Inputs** -
 ```json
 {
-  "score": "integer",
+"email": "string",
+"answers": ["b", "c", "a", "a", "d", "a"]
+}
+```
+Note - case and whitespace insensitive in input
+
+**Output** - `{"score": "integer", "class": "string"}`, or `{"result": False}`
+
+### `./user_classes` - Return a user's classes.
+
+**Inputs** -
+```json
+{
+  "request_type": ["all","current"],
   "email": "string"
 }
 ```
 
-**Output** - `{"result": bool}`
+**Output** -
+
+```json
+{
+  "class_name": [
+    "class1",
+    "class2",
+    "..."
+  ]
+}
+```

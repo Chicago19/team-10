@@ -7,12 +7,36 @@
 from backend.backend_profile import backend_profile
 from backend.backend_official import backend_official
 from backend.backend_score import backend_score
+from backend.config import config
 from faker import Faker
 import random
 
 
 # In[30]:
 
+# backend_official = backend_official(
+#                 config['user'],
+#                 config['pass'],
+#                 config['host'],
+#                 config['port'],
+#                 config['db_name']
+#         )
+#
+# backend_profile = backend_profile(
+#                 config['user'],
+#                 config['pass'],
+#                 config['host'],
+#                 config['port'],
+#                 config['db_name']
+#         )
+#
+# backend_score = backend_score(
+#                 config['user'],
+#                 config['pass'],
+#                 config['host'],
+#                 config['port'],
+#                 config['db_name']
+#         )
 
 
 def generate_data(n):
@@ -33,17 +57,10 @@ def generate_data(n):
         term = ['spring','summer','fall']
         bs.write_class_score(profile['email'],'Intro In English',random.randint(2000,2019),term[random.randint(0,2)],10)
         #print(profile)
-        
 
 
-# In[31]:
-
-
-generate_data(3)
+if __name__ == "__main__":
+    generate_data(100)
 
 
 # In[ ]:
-
-
-
-

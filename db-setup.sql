@@ -33,7 +33,7 @@ CREATE TABLE official(
 	test_date timestamp,
 	best_exam varchar(30),
 	iccb_intake_form varchar(30),
-	empowerment_survey varchar(30),
+	empowerment_survey varchar(30), 
 	transportation varchar(10),
 	site_location varchar(15),
 	sig_date timestamp,
