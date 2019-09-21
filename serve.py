@@ -144,10 +144,10 @@ def return_classes():
 
 @app.route('/survey_two', methods=['POST', 'GET'])
 def take_data():
-    data = request.json
-    empowerment_survey = data['empowerment_survey']
-    transportation = data['transportation']
-    site_location = data['site_location']
+    # data = request.json
+    # empowerment_survey = data['empowerment_survey']
+    # transportation = data['transportation']
+    # site_location = data['site_location']
 
     # Didn't get to implement in time.
     return None
