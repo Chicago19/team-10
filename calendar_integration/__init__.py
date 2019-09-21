@@ -32,7 +32,7 @@ class Session:
     def search_events(self, query):
         now = datetime.datetime.utcnow().isoformat() + 'Z'
         events_result = self.session.events().list(calendarId='primary', timeMin=now,
-                                            maxResults=150, singleEvents=True,
+                                            maxResults=25, singleEvents=True,
                                             orderBy='startTime').execute()
         events = events_result.get('items', [])
         filtered_events = []
