@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import {
   MenuList,
@@ -11,9 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
   menuItemSelected: {
-    backgroundColor: "#333333 !important",
+    backgroundColor: "#333333 !important"
   },
   drawerPaper: {
     width: drawerWidth,
@@ -34,13 +35,10 @@ const determineSelections = path => {
     case "/home":
       selections[0] = true;
       break;
-    case "/home/about":
+    case "/home/exams":
       selections[1] = true;
       break;
-    case "/home/projects":
-      selections[2] = true;
-      break;
-    case "/home/experience":
+    case "/intake-registration":
       selections[3] = true;
       break;
     default:
@@ -51,34 +49,18 @@ const determineSelections = path => {
 };
 
 const Navbar = props => {
-  const { open, handleDrawerToggle } = props;
+  const { open, handleDrawerToggle, email, name } = props;
 
   const classes = useStyles();
   const selections = determineSelections(props.location.pathname);
 
   const navigation = (
     <MenuList>
-      <MenuItem
-        component={Typography}
-        variant="h2"
-        disabled
-      >
-        Temporary Name
+      <MenuItem component={Typography} variant="h2" disabled>
+        {name}
       </MenuItem>
-      <MenuItem
-        component={Typography}
-        variant="h2"
-        disabled
-      >
-        Temporary Email
-      </MenuItem>
-      <MenuItem
-        component={Link}
-        to="/home/registerstatus"
-        classes={{ selected: classes.menuItemSelected }}
-        selected={selections[1]}
-      >
-        Registration Status
+      <MenuItem component={Typography} variant="h2" disabled>
+        {email}
       </MenuItem>
       <MenuItem
         component={Link}
@@ -147,4 +129,12 @@ const Navbar = props => {
     </nav>
   );
 };
-export default withRouter(Navbar);
+
+const mapStateToProps = state => {
+  return {
+    name: state.RegistrationReducer.name,
+    email: state.RegistrationReducer.email
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Navbar));

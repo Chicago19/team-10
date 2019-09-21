@@ -39,7 +39,10 @@ const WrittenExam = props => {
         answers
       }
     } else {
-      return;
+      obj = { 
+        "email": localStorage.getItem("email"),
+        answers
+      }
     }
     
     axios.put("/written_exam_score", obj)
