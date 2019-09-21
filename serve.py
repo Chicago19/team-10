@@ -191,6 +191,10 @@ def written_exam_score():
         5: 'VenetFour',
         6: 'VenetFour'
     }
+    print("Data recieved:")
+    print(data)
+    print("Score: ", score)
+
 
     if backend_official.update_written_exam(email, score, cat[score]):
         return {"score": score, "class": cat[score]}

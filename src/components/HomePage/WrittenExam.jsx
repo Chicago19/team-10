@@ -39,13 +39,13 @@ const WrittenExam = props => {
         answers
       }
     } else {
-      obj = { 
+      obj = {
         "email": localStorage.getItem("email"),
         answers
       }
     }
-    
-    axios.put("/written_exam_score", obj)
+
+    axios.post("/written_exam_score", obj)
       .then(res => {
         console.log(res);
         window.location.pathname = '/home';
