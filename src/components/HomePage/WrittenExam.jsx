@@ -1,50 +1,98 @@
 import React from "react";
-//import $ from "jquery";
+import axios from "axios";
 
-import { Grid, TextField, Button, Typography, Box } from "@material-ui/core";
+import { connect } from "react-redux";
+
+import { Grid, Button, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
-import { Link } from "react-router-dom";
 import Question from "./Question";
 import data from "./Data";
 
 const styles = {
-    fullHeightContainer: {
-        height: "100%"
-    },
-    fullWidthItem: {
-        width: "85%"
-    },
-    centerItem: {
-        width: "100%"
-    }
+  fullHeightContainer: {
+    height: "100%"
+  },
+  fullWidthItem: {
+    width: "85%"
+  },
+  centerItem: {
+    width: "100%"
+  }
 };
 
 const WrittenExam = props => {
-    const { classes } = props;
+  const { classes, email1, email2, answers } = props;
 
-    return (
-        <div>
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                className={classes.fullHeightContainer}
-            >
-                <Grid item style={{ paddingBottom: "20px", width: "100%", textAlign: "center" }}>
-                    <Typography variant="h2">Written Exam</Typography>
-                </Grid>
-            </Grid>
-         
-            {data.map((m, index) =>
-                    <div style={{ paddingLeft: "10px", paddingBottom: "5px" }}>
-                        <Question A={m.A} B={m.B} C={m.C} D={m.D} question={m.question} key={index} i={index + 1} />
-                    </div>
-            )}
-            <Grid item style={{ paddingBottom: "80px", width: "100%", textAlign: "center" }}>
-               <Button variant="outlined"> Submit</Button>
-               </Grid>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let obj = {};
+
+    if(email1 !== undefined) {
+      obj = {
+        "email": email1,
+        answers
+      }
+    } else if(email2 !== undefined) {
+      obj = {
+        "email": email2,
+        answers
+      }
+    } else {
+      return;
+    }
+    
+    axios.put("/written_exam_score", obj)
+      .then(res => {
+        console.log(res);
+        window.location.pathname = '/home';
+      });
+  };
+
+  return (
+    <div>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        className={classes.fullHeightContainer}
+      >
+        <Grid
+          item
+          style={{ paddingBottom: "20px", width: "100%", textAlign: "center" }}
+        >
+          <Typography variant="h2">Written Exam</Typography>
+        </Grid>
+      </Grid>
+
+      {data.map((m, index) => (
+        <div style={{ paddingLeft: "10px", paddingBottom: "5px" }} key={index}>
+          <Question
+            A={m.A}
+            B={m.B}
+            C={m.C}
+            D={m.D}
+            question={m.question}
+            i={index + 1}
+          />
         </div>
-    );
+      ))}
+      <Grid
+        item
+        style={{ paddingBottom: "80px", width: "100%", textAlign: "center" }}
+      >
+        <Button variant="outlined" onClick={handleSubmit}> Submit</Button>
+      </Grid>
+    </div>
+  );
 };
 
-export default withStyles(styles)(WrittenExam);
+const mapStateToProps = state => {
+  return {
+    email1: state.RegistrationReducer.email,
+    email2: state.LoginReducer.email,
+    answers: state.ExamReducer.answers
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(WrittenExam));
