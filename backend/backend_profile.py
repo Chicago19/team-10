@@ -5,12 +5,13 @@
 
 
 import psycopg2
+import datetime
 
 
-# In[17]:
+# In[10]:
 
 
-class backend():
+class backend_profile():
     def __init__(self,user,password,host,port,database):
         #self.connection = None
         #self.cursor = None
@@ -43,8 +44,13 @@ class backend():
         try:
             cursor.execute("INSERT INTO profile(name,email,referral,phone,password,age) VALUES(%s,%s,%s,%s,%s,%s)",(profile["name"],profile["email"],profile["referral"],profile["phone"],profile["password"],profile["age"]))
             connection.commit()
+            cursor = connection.cursor()
+            now = datetime.datetime.now()
+            cursor.execute("INSERT INTO official(email,registration_date) VALUES(%s,%s)",(profile['email'],now.strftime("%Y-%m-%d %H:%M")))
+            connection.commit()
             return True
         except (Exception,psycopg2.Error) as error:
+            print(error)
             return False
         finally:
             self.close_connection(connection,cursor)
@@ -57,7 +63,7 @@ class backend():
             cursor.execute(command, (email,))
             db_pass = cursor.fetchone()
             #print('herere')
-            print(db_pass)
+            #print(db_pass)
             if db_pass[0] == password:
                 return True
             return False
@@ -75,9 +81,10 @@ class backend():
             cursor.execute(command, (email,))
                 #mobile_records = 
             data = cursor.fetchall()
-            print(len(data))
+            #print(len(data))
             if len(data) > 0:
                 return self.__check_login_password(email,password)
+            return False
         except (Exception,psycopg2.Error) as error:
             print("Error while checking login email", error)
             return False
@@ -109,48 +116,48 @@ class backend():
 
 # ## Main
 
-# In[18]:
+# In[11]:
 
 
-# bd = backend('postgres','940728','localhost','5432','cfg_10')
+# bd = backend_profile('postgres','940728','localhost','5432','cfg_10')
+
+
+# # In[12]:
+
+
+# profile = {'name':'Stanley Yang',
+#           'email':'121542@illinois.edu',
+#           'referral':'Jimmy',
+#           'phone':'2245672231',
+#           'password':'123456',
+#           'age':'42'}
+# print(bd.insert_profile(profile))
+
+
+# # In[13]:
+
+
+
+# bd.check_email('1244@illinois.edu')
+
+
+# # In[14]:
+
+
+
+# bd.check_email('12@illinois.edu')
+
+
+# # In[15]:
+
+
+# print(bd.check_login_credential('12@illinois.edu','123456'))
 
 
 # In[ ]:
 
 
 
-
-
-# In[19]:
-
-
-# profile = {'name':'Stanley Yang',
-#           'email':'12@illinois.edu',
-#           'referral':'Jimmy',
-#           'phone':'2245672231',
-#           'password':'123456',
-#           'age':'42'}
-#print(bd.insert_profile(profile))
-
-
-# In[20]:
-
-
-
-#bd.check_email('1234@illinois.edu')
-
-
-# In[21]:
-
-
-
-#bd.check_email('12@illinois.edu')
-
-
-# In[22]:
-
-
-#bd.check_login_credential('12@illinois.edu','123456')
 
 
 # In[ ]:
