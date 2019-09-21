@@ -3,6 +3,7 @@ import $ from "jquery";
 
 import { Grid, TextField, Button, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import { Link } from "react-router-dom";
 
 const styles = {
   fullHeightContainer: {
@@ -40,10 +41,13 @@ const Email = props => {
       className={classes.fullHeightContainer}
       id="email"
     >
-      <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
-        <Typography variant="h2">
-          Registration
-        </Typography>
+      <Grid
+        item
+        container
+        justify="center"
+        className={`${classes.headerPadding} ${classes.fullWidthItem}`}
+      >
+        <Typography variant="h2">Create Profile</Typography>
       </Grid>
       <Grid item container justify="center" className={classes.fullWidthItem}>
         <TextField
@@ -54,6 +58,13 @@ const Email = props => {
           variant="outlined"
           className={classes.centerItem}
         />
+      </Grid>
+      <Grid item container className={classes.fullWidthItem}>
+        <Grid item xs container>
+          <Link to="/login">
+            <Button variant="outlined">login</Button>
+          </Link>
+        </Grid>
       </Grid>
       <Grid item container justify="flex-end" className={classes.fullWidthItem}>
         <Button variant="outlined" onClick={nextAnimation}>
