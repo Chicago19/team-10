@@ -1,8 +1,8 @@
 from flask import Flask, request
 from calendar_integration import Session
-from .backend import backend_profile
+from backend.backend_official import backend_official
 
-backend = backend_profile('cfg10', 'codeforgood', 'localhost', 5432, 'cfg_10')
+backend = backend_official('cfg10', 'codeforgood', 'localhost', 5432, 'cfg_10')
 
 app = Flask(__name__, static_folder='build/static', template_folder='build')
 cal = Session()
