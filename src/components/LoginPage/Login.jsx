@@ -56,17 +56,18 @@ const Login = props => {
           className={classes.centerItem}
         />
       </Grid>
+
       <Grid item container className={classes.fullWidthItem}>
-      <Grid item xs container>
-      <Link to="/registration">
+        <Grid item xs container>
+          <Link to="/registration">
             <Button variant="outlined">
-              Register
-            </Button>
-          </Link>
+               Register
+             </Button>
+           </Link>
         </Grid>
         <Grid item xs container justify="flex-end">
           <Link to="/home">
-            <Button variant="outlined">
+            <Button variant="contained" color="primary">
               Submit
             </Button>
           </Link>
