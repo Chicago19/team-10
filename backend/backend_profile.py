@@ -36,7 +36,7 @@ class backend_profile():
             return connection
         except (Exception,psycopg2.Error) as error:
             print("Error while connecting to PostgreSQL", error)
-            
+
     def insert_profile(self,profile):
 
         connection = self.connect_to_database()
@@ -91,14 +91,14 @@ class backend_profile():
             return False
         finally:
             self.close_connection(connection,cursor)
-            
+
     def check_login_credential(self,email,password):
         try:
             connection = self.connect_to_database()
             cursor = connection.cursor()
             command = "SELECT * FROM profile WHERE email = %s;"
             cursor.execute(command, (email,))
-                #mobile_records = 
+                #mobile_records =
             data = cursor.fetchall()
             #print(len(data))
             if len(data) > 0:
@@ -109,14 +109,14 @@ class backend_profile():
             return False
         finally:
             self.close_connection(connection,cursor)
-            
+
     def check_email(self,email):
         try:
             connection = self.connect_to_database()
             cursor = connection.cursor()
             command = "SELECT * FROM profile WHERE email = %s;"
             cursor.execute(command, (email,))
-            #mobile_records = 
+            #mobile_records =
             if len(cursor.fetchall()) > 0:
                 return True
             return False
@@ -130,7 +130,7 @@ class backend_profile():
             cursor.close()
             connection.close()
             #print("PostgreSQL connection is closed!")
-            
+
 
 
 # ## Main
@@ -180,7 +180,3 @@ class backend_profile():
 
 
 # # In[ ]:
-
-
-
-
