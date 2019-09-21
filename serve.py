@@ -76,6 +76,17 @@ def email_test():
         return {"result": False}
 
 
+@app.route('/avalible_classes', methods=['POST', 'GET'])
+def return_classes():
+    data = request.json
+    # Do something with the data.
+    return backend.get_all_classes()
+
+
+
+
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='199.253.248.17', port=5005)

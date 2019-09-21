@@ -11,7 +11,7 @@ CREATE TABLE class(
 	email varchar(30) REFERENCES profile(email),
 	class_name varchar(30) REFERENCES courses(class_name),
 	class_year char(4),
-	class_semester varchar(10),
+	class_semester varchar(10) CHECK class_semester in ("fall", "spring", "summer"),
 	score varchar(10),
 	PRIMARY KEY (email, class_name, class_year, class_semester)
 );

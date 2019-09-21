@@ -20,7 +20,7 @@ class backend_official():
         self.host = host
         self.port = port
         self.database = database
-        
+
     def connect_to_database(self):
         try:
             connection = psycopg2.connect(user=self.user,
@@ -37,7 +37,7 @@ class backend_official():
             return connection
         except (Exception,psycopg2.Error) as error:
             print("Error while connecting to PostgreSQL", error)
-    
+
     def update_written_exam(self,email,written_score,level):
 
         connection = self.connect_to_database()
@@ -58,6 +58,48 @@ class backend_official():
             return False
         finally:
             self.close_connection(connection,cursor)
+
+    def get_all_classes(self):
+        try:
+            connection = psycopg2.connect(user=self.user,
+                                         password=self.password,
+                                         host=self.host,
+                                         port=self.port,
+                                         database=self.database)
+            cursor = connection.cursor()
+
+            vals = cursor.execute("SELECT * FROM courses")
+            return vals
+
+        except Exception:
+            return False
+
+    def get_user_clases(self, email):
+        try:
+            connection = psycopg2.connect(user=self.user,
+                                         password=self.password,
+                                         host=self.host,
+                                         port=self.port,
+                                         database=self.database)
+            cursor = connection.cursor()
+
+            now = datetime.now()
+
+            if datetime.month > 8:
+                semester = "summer"
+            elif datetime.month > 4:
+                semester = "spring"
+            else:
+                semester = "fall"
+
+            vals = cursor.execute("SELECT class_name FROM class WHERE email = ? AND class_year = ? AND class_semester = ?", (email, now.year, semester))
+            return vals
+
+        except Exception:
+            return False
+
+
+
     def close_connection(self,connection,cursor):
         if (connection):
             cursor.close()
@@ -83,7 +125,3 @@ class backend_official():
 
 
 # In[ ]:
-
-
-
-
