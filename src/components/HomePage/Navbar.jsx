@@ -76,11 +76,27 @@ const Navbar = props => {
       </MenuItem>
       <MenuItem
         component={Link}
+        to="/home/registerstatus"
+        classes={{ selected: classes.menuItemSelected }}
+        selected={selections[1]}
+      >
+        Registration Status
+      </MenuItem>
+      <MenuItem
+        component={Link}
         to="/home"
         classes={{ selected: classes.menuItemSelected }}
-        selected={selections[0]}
+        selected={selections[1]}
       >
         Courses
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        to="/home/exam"
+        classes={{ selected: classes.menuItemSelected }}
+        selected={selections[1]}
+      >
+        Take the Written Exam
       </MenuItem>
       <MenuItem
         component={Link}
@@ -89,14 +105,6 @@ const Navbar = props => {
         selected={selections[1]}
       >
         Volunteer
-      </MenuItem>
-      <MenuItem
-        component={Link}
-        to="/exam"
-        classes={{ selected: classes.menuItemSelected }}
-        selected={selections[2]}
-      >
-        Take the Written Exam
       </MenuItem>
     </MenuList>
   );
