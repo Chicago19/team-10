@@ -3,10 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import {
   MenuList,
   MenuItem,
-  ListItemIcon,
   Hidden,
   Drawer,
-  Grid,
   Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -105,6 +103,14 @@ const Navbar = props => {
         selected={selections[1]}
       >
         Volunteer
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        to="/intake-registration"
+        classes={{ selected: classes.menuItemSelected }}
+        selected={selections[3]}
+      >
+        Intake Registration Form
       </MenuItem>
     </MenuList>
   );
