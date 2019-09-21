@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Button, MenuItem, Grid, Typography} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
@@ -94,7 +95,12 @@ const Home = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Current Course Example 1</MenuItem>
+            <MenuItem 
+            onClick={handleClose}
+            component={Link}
+            to="/course-registration">
+              Current Course Example 1
+            </MenuItem>
           </Menu>
         </Grid>
         <Grid item>
@@ -112,7 +118,12 @@ const Home = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Available Course Example</MenuItem>
+            <MenuItem 
+            onClick={handleClose}
+            component={Link}
+            to="/course-registration">
+              Available Course Example
+              </MenuItem>
           </Menu>
         </Grid>
       </Grid>
