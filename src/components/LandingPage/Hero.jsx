@@ -17,6 +17,7 @@ const Hero = props => {
   const { classes } = props;
 
   const scrollAnimation = () => {
+    // window.scrollTo(0,0)
     $("html, body").animate(
       {
         scrollTop: $("#about").offset().top
