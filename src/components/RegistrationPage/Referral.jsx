@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import $ from "jquery";
+import axios from "axios";
 
 import { Grid, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
@@ -20,10 +21,29 @@ const styles = {
 };
 
 const Referral = props => {
-  const { classes, registerReferral } = props;
+  const { classes, registerReferral, profile } = props;
 
   const handleReferralChange = e => {
     registerReferral(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (
+      profile.name === undefined ||
+      profile.email === undefined ||
+      profile.password === undefined ||
+      profile.phone === undefined ||
+      profile.age === undefined
+    ) {
+      alert("One or more required fields is not complete!");
+      return;
+    }
+      axios.post("/create_profile", profile)
+        .then(res => {
+          console.log("success");
+        });
   };
 
   const backAnimation = () => {
@@ -60,7 +80,7 @@ const Referral = props => {
           </Button>
         </Grid>
         <Grid item xs container justify="flex-end">
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Grid>
@@ -69,8 +89,18 @@ const Referral = props => {
   );
 };
 
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    profile: state.RegistrationReducer
+  };
+};
+
 const mapDispatchToProps = {
   registerReferral
-}
+};
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Referral));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Referral));
