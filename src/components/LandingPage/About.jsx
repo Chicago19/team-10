@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/styles";
 
 const styles = {
   fullHeightWidth: {
-    height: "100%"
+    height: "100%",
+    maxWidth: "100%"
   }
 };
 
@@ -18,6 +19,7 @@ const About = props => {
       id="about"
       className={classes.fullHeightWidth}
       alignItems="center"
+      spacing = {2}
     >
       <Grid item>
         <Typography variant="h3">About</Typography>
