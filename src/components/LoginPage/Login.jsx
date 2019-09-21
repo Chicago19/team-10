@@ -57,6 +57,13 @@ const Login = props => {
         />
       </Grid>
       <Grid item container className={classes.fullWidthItem}>
+      <Grid item xs container>
+      <Link to="/registration">
+            <Button variant="outlined">
+              Register
+            </Button>
+          </Link>
+        </Grid>
         <Grid item xs container justify="flex-end">
           <Link to="/home">
             <Button variant="outlined">
