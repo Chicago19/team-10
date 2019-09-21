@@ -1,6 +1,6 @@
 from flask import Flask, request
 from calendar_integration import Session
-from backend import backend_profile
+from .backend import backend_profile
 
 backend = backend_profile('cfg10', 'codeforgood', 'localhost', 5432, 'cfg_10')
 
