@@ -78,3 +78,63 @@ Note that other attributes are also present - reference https://developers.googl
 **Inputs**: `{"email": "email_address"}`
 
 **Outputs**: `{"result": boolean}`
+
+### `/view_class_score` - View a user's class score
+
+**Inputs**:
+
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string"
+}
+```
+
+**Outputs**:
+If success: `{"score": score}`. If fail: `{"score": "error"}`
+
+### `/update_class_score` - Update a user's score in a class
+
+**Inputs**:
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string",
+  "score": "Integer"
+}
+```
+
+**Outputs**:
+  `{"result": bool}`
+
+### `write_class_score` - Write a user's class score
+
+**Inputs**:
+```JSON
+{
+  "email": "string",
+  "class_name": "string",
+  "class_year": "string",
+  "class_semester": "string",
+  "score": "Integer"
+}
+```
+
+**Outputs**:
+  `{"result": bool}`
+
+### `./insert_written_exam` - Update a user's written exam score.
+
+**Inputs** -
+```json
+{
+  "score": "integer",
+  "email": "string"
+}
+```
+
+**Output** - `{"result": bool}`
