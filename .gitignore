@@ -7,6 +7,7 @@ node_modules/
 
 # ignore composer vendor directory
 /vendor
+/temp
 
 # ignore components loaded via Bower
 /bower_components
