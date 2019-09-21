@@ -52,6 +52,7 @@ def scoring():
 @app.route('/create_profile', methods=['POST', 'GET'])
 def add_profile():
     profile_data = request.json
+    print(profile_data)
     if backend.insert_profile(profile_data):
         return {'return': True}
     else:
@@ -76,23 +77,23 @@ def email_test():
         return {"result": False}
 
 
-@app.route('/all_classes', methods=['POST', 'GET'])
-# def return_all_classes():
-#
-#     return {'output': ["IE": [
-#         "Intro",
-#         "1",
-#         "2",
-#         "3",
-#         "4",
-#         "5"
-#         ],
-#         "WFD": [
-#             "CustServ",
-#             "LatinFinance",
-#             "Insurance"
-#         ]]
-#         }
+# @app.route('/all_classes', methods=['POST', 'GET'])
+# # def return_all_classes():
+# #
+# #     return {'output': ["IE": [
+# #         "Intro",
+# #         "1",
+# #         "2",
+# #         "3",
+# #         "4",
+# #         "5"
+# #         ],
+# #         "WFD": [
+# #             "CustServ",
+# #             "LatinFinance",
+# #             "Insurance"
+# #         ]]
+# #         }
 
 
 @app.route('/avalible_classes', methods=['POST', 'GET'])
