@@ -16,7 +16,7 @@ CREATE TABLE class(
 
 CREATE TABLE official(
 	email varchar(30) REFERENCES profile(email),
-	registrtation_date varchar(30),
+	registration_date varchar(30),
 	keyword varchar(30),
 	oral_score varchar(30),
 	written_level varchar(30),

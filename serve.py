@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from calendar_integration import Session
+import json
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 cal = Session()
@@ -9,15 +10,18 @@ cal = Session()
 def hello():
     return {"test": True}
 
-@app.route("/calendar", methods=['POST'])
+@app.route("/calendar", methods=['POST', 'GET'])
 def calendar():
-    print(request.form)
-    event_name = request.form['cal_filter']
-    return cal.search_events(event_name)
+    event_name = request.json['cal_filter']
+    print(event_name)
+    print(type(event_name))
+    return {'result': cal.search_events(event_name)}
 
-@app.route("/score", methods=['POST'])
+    # return {"test": True}
+
+@app.route("/score", methods=['POST', 'GET'])
 def scoring():
-    user_score = request.form['answers']
+    user_score = request.json['answers']
     correct_score = [1,1,2,3,4]
     score = 0
     for vals in zip(user_score, correct_score):
