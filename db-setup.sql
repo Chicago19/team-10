@@ -3,7 +3,8 @@ CREATE TABLE profile(
 	email varchar(30) PRIMARY KEY,
 	referral varchar(30),
 	phone varchar(13),
-	password char(42)
+	password char(42),
+	age char(2)
 );
 
 CREATE TABLE class(
@@ -19,7 +20,7 @@ CREATE TABLE official(
 	keyword varchar(30),
 	oral_score varchar(30),
 	written_level varchar(30),
-	test_date varchar(30),
+	test_date timestamp,
 	best_exam varchar(30),
 	iccb_intake_form varchar(30),
 	empowerment_survey varchar(30),
