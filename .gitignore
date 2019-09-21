@@ -55,6 +55,9 @@ Thumbs.db
 /calendar_integration/credentials.json
 /calendar_integration/token.pickle
 
+# postgres login
+/backend/config.py
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
@@ -85,3 +88,6 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Flask env
+.flaskenv

@@ -1,16 +1,33 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from calendar_integration import Session
 from backend.backend_official import backend_official
+from backend.config import config
+import os
 
-backend = backend_official('cfg10', 'codeforgood', 'localhost', 5432, 'cfg_10')
+backend = backend_official(
+                config['user'],
+                config['pass'],
+                config['host'],
+                config['port'],
+                config['db_name']
+        )
 
-app = Flask(__name__, static_folder='build/static', template_folder='build')
+app = Flask(__name__, static_folder='./temp', template_folder='build')
 cal = Session()
 
 
-@app.route('/', methods=['POST', 'GET'])
-def hello():
-    return {'test': True}
+# @app.route('/', methods=['POST', 'GET'])
+# def hello():
+#     return {'test': True}
+
+
+@app.route('/landing')
+@app.route('/registration')
+@app.route('/login')
+@app.route('/home')
+@app.route('/loading')
+def index():
+    return render_template("index.html")
 
 
 @app.route('/calendar', methods=['POST', 'GET'])
