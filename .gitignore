@@ -51,6 +51,10 @@ Thumbs.db
 *.key
 *.pem
 
+# credentails.json for google calendar
+/calendar_integration/credentials.json
+/calendar_integration/token.pickle
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
