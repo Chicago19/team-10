@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Button, MenuItem, Grid, Typography, Grow, Paper, Popper, MenuList, ClickAwayListener } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Button, MenuItem, Grid, Typography} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
 const Home = () => {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const anchorRef = React.useRef(null);
+  //const anchorRef = React.useRef(null);
   const classes = useStyles();
-  
+
 
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
@@ -76,7 +76,7 @@ const Home = () => {
         alignItems="center"
       >
         <Grid item>
-          <Typography variant= "h1">Courses</Typography>
+          <Typography variant="h1">Courses</Typography>
         </Grid>
         <Grid item>
           <Button
@@ -85,8 +85,8 @@ const Home = () => {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}>
-            <Typography variant = "h3">Current Courses:</Typography>
-            </Button>
+            <Typography variant="h3">Current Courses:</Typography>
+          </Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -104,7 +104,7 @@ const Home = () => {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}>
-            <Typography variant = "h3">Available Courses:</Typography>
+            <Typography variant="h3">Available Courses:</Typography>
           </Button>
           <Menu id="simple-menu"
             anchorEl={anchorEl}

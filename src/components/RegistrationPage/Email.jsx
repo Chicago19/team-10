@@ -42,7 +42,7 @@ const Email = props => {
     >
       <Grid item container justify="center" className={`${classes.headerPadding} ${classes.fullWidthItem}`}>
         <Typography variant="h2">
-          Registration
+          Create Profile
         </Typography>
       </Grid>
       <Grid item container justify="center" className={classes.fullWidthItem}>
