@@ -15,6 +15,8 @@ const LoginReducer = (state = initialState, action) => {
       password: action.payload.password
     };
   }
+
+  return state;
 };
 
 export default LoginReducer;

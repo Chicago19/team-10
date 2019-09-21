@@ -38,6 +38,7 @@ const Login = props => {
       axios.post("/auth_path", loginInfo)
         .then(res => {
           console.log("res:  " + res);
+          window.location.pathname = "/home";
         });
     } else {
       return;
@@ -79,7 +80,7 @@ const Login = props => {
           margin="normal"
           variant="outlined"
           className={classes.centerItem}
-          onChangePassword={handlePasswordChange}
+          onChange={handlePasswordChange}
         />
       </Grid>
       <Grid item container className={classes.fullWidthItem}>
